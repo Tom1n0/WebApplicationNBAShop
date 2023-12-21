@@ -1,0 +1,57 @@
+﻿@model Usuario
+
+@{
+    ViewData["Title"] = "Perfil de usuario";
+}
+
+<h2>Perfil de usuario</h2>
+
+<table class="table">
+    <tr>
+        <th>Nombre de usuario</th>
+        <td>@Model.NombreUsuario</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Correo</td>
+    </tr>
+    <tr>
+        <th>Nombre</th>
+        <td>@Model.Nombre</td>
+    </tr>
+    <tr>
+        <th>Telefono</th>
+        <td>@Model.Telefono</td>
+    </tr>
+</table>
+
+<h3>Direcciones</h3>
+@if(Model.Direcciones.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Direccion</th>
+                <th>Ciudad</th>
+                <th>Provincia</th>
+                <th>Codigo Postal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var direccion in Model.Direcciones)
+            {
+                <tr>
+                    <td>@direccion.Adress</td>
+                    <td>@direccion.Ciudad</td>
+                    <td>@direccion.Provincia</td>
+                    <td>@direccion.CodigoPostal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}else
+{
+    <p>No hay direcciones disponibles.</p>
+}
+
+<a asp-action="AgregarDireccion" class="btn btn-primary" asp-route-id="@Model.IdUsuario">Agregar direccion</a>

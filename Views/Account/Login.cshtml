@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Iniciar sesion";
+}
+
+<div class="container bg-light p-4">
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <p>Ya has iniciado sesion. Serás redirigido al inicio en unos segundos...</p>
+        <script>
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Index", "Home")';
+            }, 3000);
+        </script>
+    }
+    else
+    {
+        <h2>Iniciar sesion</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input id="username" name="username" required type="text" class="form-control">
+                <label for="password">Contraseña</label>
+                <input id="password" name="password" required type="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+        <br />
+        <a class="btn btn-outline-primary mt-2" asp-action="Register">Registrarse</a>
+    }
+</div>
